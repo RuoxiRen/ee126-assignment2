@@ -19,8 +19,9 @@ type ByteArray is array (0 to NUM_BYTES) of STD_LOGIC_VECTOR(7 downto 0);
 signal imemBytes : ByteArray;
 begin
 	process
-	variable first:boolean:=true;
-		if(first) then
+	variable first:boolean := true;
+	begin
+		if (first) then
 			imemBytes(1) <= "00010001";
 			imemBytes(2) <= "00110011";
 			imemBytes(3) <= "00000000";
@@ -33,6 +34,4 @@ begin
 				imemBytes(to_integer(unsigned(Address))+2)&
 				imemBytes(to_integer(unsigned(Address))+3);
 
-
-
-end imem_behaviour
+end imem_behaviour;

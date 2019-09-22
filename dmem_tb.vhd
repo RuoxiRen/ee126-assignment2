@@ -18,7 +18,7 @@ begin
 	UUT:entity work.DMEM port map(WriteData,Address,MemRead,MemWrite,Clock,ReadData,DEBUG_MEM_CONTENTS);
 	
 	clk_pro:process
-		constant clk_period: time :=3ns;
+		constant clk_period: time :=3 ns;
 		begin
 			Clock<='0';
 			wait for clk_period;
@@ -26,7 +26,7 @@ begin
 			wait for clk_period;
 		end process;
 	tb1:process
-		constant period: time :=10ns;
+		constant period: time :=10 ns;
 		begin
 			WriteData <= X"ABCDEF12";
 			Address <= X"00000000";
@@ -41,7 +41,7 @@ begin
 			wait for period;
 
 			WriteData <= X"87654321";
-			Address <= X"0000000B";
+			Address <= X"0000000C";
 			MemRead <= '0';
 			MemWrite <= '1';
 			wait for period;
@@ -60,7 +60,7 @@ begin
 			MemWrite <= '0';
 			wait for period;
 			assert (ReadData = X"11330098")
-			report "Error in Address 0" severity error;
+			report "Error in Address 4" severity error;
 
 			WriteData <= X"12345678";
 			Address <= X"00000008";
@@ -68,15 +68,15 @@ begin
 			MemWrite <= '0';
 			wait for period;
 			assert (ReadData = X"12345678")
-			report "Error in Address 0" severity error;
+			report "Error in Address 8" severity error;
 
 			WriteData <= X"87654321";
-			Address <= X"0000000B";
+			Address <= X"0000000C";
 			MemRead <= '1';
 			MemWrite <= '0';
 			wait for period;
 			assert (ReadData = X"87654321")
-			report "Error in Address 0" severity error;
+			report "Error in Address C" severity error;
 			wait for period;
 
 		end process;

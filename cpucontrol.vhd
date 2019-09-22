@@ -22,7 +22,7 @@ port(Opcode   : in  STD_LOGIC_VECTOR(5 downto 0);
 );
 end CPUControl;
 
-architecture cpucontrol_behaviour is
+architecture cpucontrol_behaviour of CPUControl is
 begin 
 	process(Opcode)
 	begin 
@@ -57,7 +57,7 @@ begin
 				RegWrite <= '0';
 				Jump <= 'X';
 				ALUOp <= "00";
-			when "100011" => -- beq
+			when "000100" => -- beq
 				RegDst <= 'X';
 				Branch <= '1';
 				MemRead <= '0';
@@ -67,7 +67,7 @@ begin
 				RegWrite <= '0';
 				Jump <= 'X';
 				ALUOp <= "01";
-			when "100011" => -- jump
+			when "000010" => -- jump
 				RegDst <= 'X';
 				Branch <= 'X';
 				MemRead <= 'X';
@@ -77,6 +77,16 @@ begin
 				RegWrite <= '0';
 				Jump <= '1';
 				ALUOp <= "XX";
+			when others => 
+				RegDst <= 'X';
+				Branch <= 'X';
+				MemRead <= 'X';
+				MemtoReg <= 'X';
+				MemWrite <= 'X';
+				ALUSrc <= 'X';
+				RegWrite <= 'X';
+				Jump <= 'X';
+				ALUOp <= "XX";
 		end case;
 	end process;
-end cpucontrol_behaviour
+end cpucontrol_behaviour;

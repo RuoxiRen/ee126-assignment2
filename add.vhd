@@ -14,5 +14,5 @@ end ADD;
 
 architecture Behaviour of ADD is
 begin 
-	output <= in0 + in1;
-end Behaviour
+	output <= std_logic_vector(signed(in0)+signed(in1));
+end Behaviour;

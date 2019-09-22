@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL; -- STD_LOGIC and STD_LOGIC_VECTOR
+use IEEE.STD_LOGIC_SIGNED.ALL;
 use IEEE.numeric_std.ALL; -- to_integer and unsigned
 
 entity ALU is
@@ -28,10 +29,12 @@ begin
 		case (operation) is
 			when "0000" => -- and
 				ALU_result <= a and b;
-				tmp <= ('0'&a) and ('0'&b);
+				tmp(32) <= '0';
+				tmp(31)	<= '0';
 			when "0001" => -- or
 				ALU_result <= a or b;
-				tmp <= ('0'&a) or ('0'&b);
+				tmp(32) <= '0';
+				tmp(31)	<= '0';
 			when "0010" => -- add
 				ALU_result <= a+b;
 				tmp <= ('0'&a) + ('0'&b);
@@ -40,21 +43,24 @@ begin
 				tmp <= ('0'&a) - ('0'&b);
 			when "0111" => -- set less than
 				if (a<b) then
-					ALU_result <= X"01";
+					ALU_result <= X"00000001";
 				else 
-					ALU_result <= X"00";
+					ALU_result <= X"00000000";
 				end if;
 			when "1100" => -- nor
 				ALU_result <= a nor b;
-				tmp <= ('0'&a) nor ('0'&b);
+
 			when others =>
 				ALU_result <= a and b;
 				tmp <= ('0'&a) and ('0'&b);
 		end case;
-		if (ALU_result = X"0") then
-			zero <= "1";
+	end process;
+	process(ALU_result)
+	begin
+		if (ALU_result = X"00000000") then
+			zero <= '1';
 		else 
-			zero <= "0";
+			zero <= '0';
 		end if;
 	end process;
 	result <= ALU_result;

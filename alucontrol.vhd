@@ -32,13 +32,13 @@ begin
 				if (Funct(3 downto 0) = "0000") then
 					tmp <= "0010";
 				elsif (Funct(3 downto 0) = "0010") then
-					tmp <="0110"
+					tmp <="0110";
 				elsif (Funct(3 downto 0) = "0100") then
-					tmp <="0000"
+					tmp <="0000";
 				elsif (Funct(3 downto 0) = "0101") then
-					tmp <="0001"
+					tmp <="0001";
 				elsif (Funct(3 downto 0) = "1010") then
-					tmp <="0111"
+					tmp <="0111";
 				end if;
 			when others =>
 				tmp <= "0010";

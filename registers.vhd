@@ -28,7 +28,7 @@ port(RR1      : in  STD_LOGIC_VECTOR (4 downto 0);
 end registers;
 
 architecture reg_behaviour of registers is
-type reg_type is array (0 to 32) of STD_LOGIC_VECTOR(31 downto 0)
+type reg_type is array (0 to 32) of STD_LOGIC_VECTOR(31 downto 0);
 signal reg_array : reg_type;
 begin
      process(Clock,WR,WD,RegWrite)
@@ -48,10 +48,10 @@ begin
           end if;
 
           if Clock = '0' and Clock'event and RegWrite='1' then
-               addr = to_integer(unsigned(WR));
+               addr := to_integer(unsigned(WR));
                if addr = 0 then
                     reg_array(addr) <= X"00000000";
-               else then 
+               else
                     reg_array(addr) <= WD;
                end if;
           end if;
