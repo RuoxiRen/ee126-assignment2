@@ -42,7 +42,7 @@ begin
 			wait for period;
 			assert (RD1 = X"00000000" and RD2 = X"00000000")
 			report "Error in writing to $0" severity error;
-			wait for period;
+			
 
 			RR1 <= "01000";
 			RR2 <= "01001";
@@ -52,7 +52,7 @@ begin
 			wait for period;
 			assert (RD1 = X"00000000" and RD2 = X"00000001")
 			report "Error in reading $t0 and $t2" severity error;
-			wait for period;
+			
 
 			RR1 <= "01010";
 			RR2 <= "01011";
@@ -62,7 +62,7 @@ begin
 			wait for period;
 			assert (RD1 = X"00000002" and RD2 = X"00000004")
 			report "Error in reading $t3 and $t4" severity error;
-			wait for period;
+			
 
 			RR1 <= "10000";
 			RR2 <= "10001";
@@ -72,7 +72,7 @@ begin
 			wait for period;
 			assert (RD1 = X"00000008" and RD2 = X"00000010")
 			report "Error in reading $s0 and $s1" severity error;
-			wait for period;
+			
 
 			RR1 <= "01100";
 			RR2 <= "01101";
@@ -82,6 +82,13 @@ begin
 			wait for period;
 			assert (RD1 = X"ABCDEF12" and RD2 = X"12345678")
 			report "Error in reading $t5 and $t6" severity error;
+			
+
+			RR1 <= "01100";
+			RR2 <= "01101";
+			WR  <= "01100";
+			WD  <= X"FFFFFFFF";
+			RegWrite <= '1';
 			wait for period;
 			
 
